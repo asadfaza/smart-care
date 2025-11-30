@@ -1,0 +1,20 @@
+blinker==1.9.0
+click==8.3.1
+flask==3.1.2
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+Werkzeug==3.1.4
+
+# Firebase
+firebase-admin==6.3.0
+
+# Caching
+Flask-Caching==2.1.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Production server
+gunicorn==21.2.0
+

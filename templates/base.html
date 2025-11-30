@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang|default('ru') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ translations.get('meta', {}).get('description', 'Smart Care - Приложение для помощи людям с заболеваниями, использующее AI и компьютерное зрение') }}">
+    <meta name="keywords" content="{{ translations.get('meta', {}).get('keywords', 'smart care, здоровье, диабет, аллергии, computer vision, AI') }}">
+    <meta name="author" content="Smart Care Team">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ translations.get('meta', {}).get('og_title', 'Smart Care - Умный помощник для здоровья') }}">
+    <meta property="og:description" content="{{ translations.get('meta', {}).get('og_description', 'Мгновенный анализ продуктов через камеру смартфона') }}">
+    <meta property="og:type" content="website">
+    
+    <title>{% block title %}{{ translations.get('meta', {}).get('title', 'Smart Care - Умный помощник для здоровья') }}{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Основные стили -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+</head>
+<body>
+    <!-- Loader (опционально) -->
+    <div id="loader" class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+    
+    <!-- Основной контент -->
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>{{ translations.get('footer', {}).get('copyright', '© 2024 Smart Care. Все права защищены.') }}</p>
+            <p class="footer-tech">{{ translations.get('footer', {}).get('tagline', 'Создано с ❤️ для хакатона') }}</p>
+        </div>
+    </footer>
+    
+    <!-- Основной JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

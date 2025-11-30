@@ -1,0 +1,456 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - Smart Care{% endblock %}
+
+{% block content %}
+<div class="admin-panel">
+    <div class="container">
+        <header class="admin-header">
+            <h1><i class="fas fa-cog"></i> Admin Panel - Smart Care</h1>
+            <p class="subtitle">Управление контентом и переводами</p>
+        </header>
+
+        <div class="admin-navigation">
+            <button class="admin-tab active" data-tab="translations">
+                <i class="fas fa-language"></i> Переводы
+            </button>
+            <button class="admin-tab" data-tab="team">
+                <i class="fas fa-users"></i> Команда
+            </button>
+            <button class="admin-tab" data-tab="roadmap">
+                <i class="fas fa-road"></i> Дорожная карта
+            </button>
+            <button class="admin-tab" data-tab="settings">
+                <i class="fas fa-wrench"></i> Настройки
+            </button>
+        </header>
+
+        <!-- Translations Tab -->
+        <div class="admin-content active" id="translations-tab">
+            <div class="section-header">
+                <h2>Управление переводами</h2>
+                <button class="btn-primary" onclick="saveTranslations()">
+                    <i class="fas fa-save"></i> Сохранить все
+                </button>
+            </div>
+
+            <div class="language-selector">
+                <label>Выберите язык:</label>
+                <select id="lang-select" onchange="loadTranslations()">
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
+            </div>
+
+            <div class="translations-list" id="translations-content">
+                <!-- Будет заполнено через JavaScript -->
+            </div>
+        </div>
+
+        <!-- Team Tab -->
+        <div class="admin-content" id="team-tab">
+            <div class="section-header">
+                <h2>Управление командой</h2>
+                <button class="btn-primary" onclick="addTeamMember()">
+                    <i class="fas fa-plus"></i> Добавить члена команды
+                </button>
+            </div>
+            <div id="team-content" class="team-list">
+                <!-- Будет заполнено через JavaScript -->
+            </div>
+        </div>
+
+        <!-- Roadmap Tab -->
+        <div class="admin-content" id="roadmap-tab">
+            <div class="section-header">
+                <h2>Управление дорожной картой</h2>
+                <button class="btn-primary" onclick="addMilestone()">
+                    <i class="fas fa-plus"></i> Добавить milestone
+                </button>
+            </div>
+            <div id="roadmap-content" class="roadmap-list">
+                <!-- Будет заполнено через JavaScript -->
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="admin-content" id="settings-tab">
+            <div class="section-header">
+                <h2>Настройки</h2>
+            </div>
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <h3><i class="fas fa-database"></i> Firebase Status</h3>
+                    <p id="firebase-status">Проверка...</p>
+                    <button class="btn-secondary" onclick="checkFirebaseStatus()">
+                        <i class="fas fa-sync"></i> Проверить подключение
+                    </button>
+                </div>
+                <div class="setting-item">
+                    <h3><i class="fas fa-trash"></i> Кэш</h3>
+                    <p>Очистить кэш приложения</p>
+                    <button class="btn-danger" onclick="clearCache()">
+                        <i class="fas fa-trash-alt"></i> Очистить кэш
+                    </button>
+                </div>
+                <div class="setting-item">
+                    <h3><i class="fas fa-download"></i> Экспорт данных</h3>
+                    <p>Скачать все данные в JSON</p>
+                    <button class="btn-secondary" onclick="exportData()">
+                        <i class="fas fa-download"></i> Экспорт
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-panel {
+    padding: 40px 20px;
+    min-height: 100vh;
+    background: var(--light-gray);
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.admin-header h1 {
+    color: var(--primary-blue);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.admin-header .subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.admin-navigation {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.admin-tab {
+    flex: 1;
+    min-width: 150px;
+    padding: 15px 25px;
+    background: var(--white);
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.admin-tab:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.admin-tab.active {
+    background: var(--primary-blue);
+    color: var(--white);
+    border-color: var(--primary-blue);
+}
+
+.admin-content {
+    display: none;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.admin-content.active {
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.section-header h2 {
+    margin: 0;
+    color: var(--primary-blue);
+}
+
+.btn-primary, .btn-secondary, .btn-danger {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--dark-blue);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--light-gray);
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    background: var(--text-light);
+    color: var(--white);
+}
+
+.btn-danger {
+    background: #ff6b6b;
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background: #ee5a52;
+}
+
+.language-selector {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.language-selector label {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.language-selector select {
+    padding: 10px 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--white);
+    cursor: pointer;
+}
+
+.translations-list, .team-list, .roadmap-list {
+    display: grid;
+    gap: 20px;
+}
+
+.translation-item, .team-item, .roadmap-item {
+    padding: 20px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.translation-item:hover, .team-item:hover, .roadmap-item:hover {
+    border-color: var(--primary-blue);
+}
+
+.translation-item label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.translation-item input, .translation-item textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.translation-item textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.setting-item {
+    padding: 25px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.setting-item h3 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+}
+
+.setting-item p {
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+#firebase-status {
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#firebase-status.success {
+    background: #51cf66;
+    color: var(--white);
+}
+
+#firebase-status.error {
+    background: #ff6b6b;
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .admin-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .admin-tab {
+        min-width: 100%;
+    }
+}
+</style>
+
+<script>
+// Текущий выбранный язык
+let currentLang = 'ru';
+
+// Переключение табов
+document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        // Убираем active у всех табов
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+        
+        // Добавляем active к выбранному
+        this.classList.add('active');
+        const tabId = this.getAttribute('data-tab');
+        document.getElementById(tabId + '-tab').classList.add('active');
+    });
+});
+
+// Загрузка переводов
+async function loadTranslations() {
+    currentLang = document.getElementById('lang-select').value;
+    const container = document.getElementById('translations-content');
+    container.innerHTML = '<p>Загрузка...</p>';
+    
+    try {
+        const response = await fetch(`/api/translations/${currentLang}`);
+        const data = await response.json();
+        
+        let html = '';
+        for (const [section, content] of Object.entries(data)) {
+            html += `<div class="translation-section">
+                <h3><i class="fas fa-folder"></i> ${section}</h3>`;
+            
+            for (const [key, value] of Object.entries(content)) {
+                if (typeof value === 'string') {
+                    html += `
+                        <div class="translation-item">
+                            <label>${section}.${key}</label>
+                            <input type="text" value="${value}" data-section="${section}" data-key="${key}">
+                        </div>`;
+                }
+            }
+            html += '</div>';
+        }
+        
+        container.innerHTML = html || '<p>Нет данных для отображения</p>';
+    } catch (error) {
+        container.innerHTML = '<p class="error">Ошибка загрузки данных: ' + error.message + '</p>';
+    }
+}
+
+// Сохранение переводов
+async function saveTranslations() {
+    alert('Функция сохранения будет реализована. Требуется API endpoint для обновления Firestore.');
+}
+
+// Проверка статуса Firebase
+async function checkFirebaseStatus() {
+    const statusEl = document.getElementById('firebase-status');
+    statusEl.textContent = 'Проверка...';
+    statusEl.className = '';
+    
+    try {
+        const response = await fetch('/api/health');
+        const data = await response.json();
+        
+        if (data.firestore_available) {
+            statusEl.textContent = '✓ Firebase подключен';
+            statusEl.className = 'success';
+        } else {
+            statusEl.textContent = '✗ Firebase недоступен';
+            statusEl.className = 'error';
+        }
+    } catch (error) {
+        statusEl.textContent = '✗ Ошибка подключения';
+        statusEl.className = 'error';
+    }
+}
+
+// Очистка кэша
+async function clearCache() {
+    if (!confirm('Вы уверены, что хотите очистить кэш?')) return;
+    
+    try {
+        const response = await fetch('/api/clear-cache');
+        const data = await response.json();
+        alert('Кэш успешно очищен!');
+    } catch (error) {
+        alert('Ошибка: ' + error.message);
+    }
+}
+
+// Экспорт данных
+async function exportData() {
+    alert('Функция экспорта будет реализована.');
+}
+
+// Загрузка при старте
+window.addEventListener('DOMContentLoaded', () => {
+    loadTranslations();
+    checkFirebaseStatus();
+});
+</script>
+
+{% endblock %}
+

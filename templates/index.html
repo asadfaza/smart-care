@@ -1,0 +1,721 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Care - Умный помощник для здоровья{% endblock %}
+
+{% block content %}
+
+<!-- Навигация Header (для desktop) -->
+<header class="site-header desktop-only">
+    <div class="header-container">
+        <div class="logo">
+            <i class="fas fa-shield-heart"></i>
+            <span>Smart Care</span>
+        </div>
+        <nav class="header-nav">
+            <button class="nav-item active" data-section="0">
+                <span>{{ translations.get('navigation', {}).get('home', 'Главная') }}</span>
+            </button>
+            <button class="nav-item" data-section="1">
+                <span>{{ translations.get('navigation', {}).get('team', 'Команда') }}</span>
+            </button>
+            <button class="nav-item" data-section="2">
+                <span>{{ translations.get('navigation', {}).get('why_us', 'Почему мы') }}</span>
+            </button>
+            <button class="nav-item" data-section="3">
+                <span>{{ translations.get('navigation', {}).get('roadmap', 'Дорожная карта') }}</span>
+            </button>
+            <button class="nav-item" data-section="4">
+                <span>{{ translations.get('navigation', {}).get('implementation', 'Реализация') }}</span>
+            </button>
+        </nav>
+        <div class="language-switcher">
+            <button class="lang-btn {% if current_lang == 'ru' %}active{% endif %}" 
+                    onclick="window.location.href='{{ url_for('set_lang', lang='ru') }}'">
+                🇷🇺 RU
+            </button>
+            <button class="lang-btn {% if current_lang == 'en' %}active{% endif %}" 
+                    onclick="window.location.href='{{ url_for('set_lang', lang='en') }}'">
+                🇬🇧 EN
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Навигация (табы для мобильных) -->
+<nav class="nav-tabs mobile-only" id="mobile-tabs">
+    <button class="tab-button active" data-section="0">
+        <i class="fas fa-home"></i>
+        <span>{{ translations.get('navigation', {}).get('home_short', 'Главная') }}</span>
+    </button>
+    <button class="tab-button" data-section="1">
+        <i class="fas fa-users"></i>
+        <span>{{ translations.get('navigation', {}).get('team_short', 'Команда') }}</span>
+    </button>
+    <button class="tab-button" data-section="2">
+        <i class="fas fa-star"></i>
+        <span>{{ translations.get('navigation', {}).get('why_us_short', 'О нас') }}</span>
+    </button>
+    <button class="tab-button" data-section="3">
+        <i class="fas fa-road"></i>
+        <span>{{ translations.get('navigation', {}).get('roadmap_short', 'Карта') }}</span>
+    </button>
+    <button class="tab-button" data-section="4">
+        <i class="fas fa-rocket"></i>
+        <span>{{ translations.get('navigation', {}).get('implementation_short', 'План') }}</span>
+    </button>
+</nav>
+
+<!-- Переключатель языка для мобильных -->
+<div class="mobile-language-switcher mobile-only">
+    <button class="lang-btn-mobile {% if current_lang == 'ru' %}active{% endif %}" 
+            onclick="window.location.href='{{ url_for('set_lang', lang='ru') }}'">
+        🇷🇺
+    </button>
+    <button class="lang-btn-mobile {% if current_lang == 'en' %}active{% endif %}" 
+            onclick="window.location.href='{{ url_for('set_lang', lang='en') }}'">
+        🇬🇧
+    </button>
+</div>
+
+<!-- Контейнер слайдов -->
+<div class="slider-container" id="slider">
+    
+    <!-- СЕКЦИЯ 1: Проблема и Решение -->
+    <section class="slide active" data-index="0">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <div class="logo-section">
+                        <i class="fas fa-shield-heart logo-icon"></i>
+                        <h1 class="hero-title">Smart Care</h1>
+                    </div>
+                    <p class="hero-subtitle">{{ translations.get('hero', {}).get('subtitle', 'Ваш умный помощник для безопасного питания') }}</p>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <!-- Проблема -->
+                <div class="content-card problem-card">
+                    <div class="card-icon problem-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2 class="card-title">{{ translations.get('problem', {}).get('title', 'Проблема') }}</h2>
+                    <div class="card-content">
+                        <p>{{ translations.get('problem', {}).get('description', 'Люди с хроническими заболеваниями (диабет, целиакия, пищевые аллергии) сталкиваются с серьёзными трудностями:') }}</p>
+                        <ul class="feature-list">
+                            {% if translations.get('problem', {}).get('challenges') %}
+                                {% for challenge in translations.get('problem', {}).get('challenges') %}
+                                <li><i class="fas fa-{{ challenge.icon|default('circle') }}"></i> {{ challenge.text }}</li>
+                                {% endfor %}
+                            {% else %}
+                            <li><i class="fas fa-clock"></i> Тратят много времени на изучение состава продуктов</li>
+                            <li><i class="fas fa-search"></i> Сложно найти мелкий шрифт на упаковках</li>
+                            <li><i class="fas fa-exclamation-circle"></i> Ошибки могут привести к серьёзным последствиям для здоровья</li>
+                            <li><i class="fas fa-question-circle"></i> Непонятные химические названия ингредиентов</li>
+                            <li><i class="fas fa-tired"></i> Постоянный стресс при покупке продуктов</li>
+                            {% endif %}
+                        </ul>
+                        <div class="stat-box">
+                            <div class="stat-number">{{ translations.get('problem', {}).get('stat_number', '~60 млн') }}</div>
+                            <div class="stat-label">{{ translations.get('problem', {}).get('stat_label', 'человек в мире живут с диабетом и аллергиями') }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Решение -->
+                <div class="content-card solution-card">
+                    <div class="card-icon solution-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h2 class="card-title">{{ translations.get('solution', {}).get('title', 'Наше решение') }}</h2>
+                    <div class="card-content">
+                        <p class="solution-intro">{{ translations.get('solution', {}).get('description', 'Smart Care использует компьютерное зрение и AI для мгновенного анализа продуктов через камеру смартфона.') }}</p>
+                        
+                        <div class="solution-features">
+                            {% if translations.get('solution', {}).get('steps') %}
+                                {% for step in translations.get('solution', {}).get('steps') %}
+                                <div class="solution-feature">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-{{ step.icon|default('circle') }}"></i>
+                                    </div>
+                                    <h3>{{ step.title }}</h3>
+                                    <p>{{ step.description }}</p>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <div class="solution-feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <h3>Сканируй</h3>
+                                <p>Наведи камеру на продукт</p>
+                            </div>
+                            <div class="solution-feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3>Анализируй</h3>
+                                <p>AI обрабатывает состав</p>
+                            </div>
+                            <div class="solution-feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3>Получай ответ</h3>
+                                <p>Безопасно или нет</p>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="tech-stack">
+                            <h3>{{ translations.get('solution', {}).get('tech_title', 'Технологии') }}</h3>
+                            <div class="tech-badges">
+                                <span class="tech-badge"><i class="fas fa-eye"></i> Computer Vision</span>
+                                <span class="tech-badge"><i class="fas fa-robot"></i> Machine Learning</span>
+                                <span class="tech-badge"><i class="fas fa-font"></i> OCR</span>
+                                <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Mobile App</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-box success-stat">
+                            <div class="stat-number">{{ translations.get('solution', {}).get('stat_number', '98.5%') }}</div>
+                            <div class="stat-label">{{ translations.get('solution', {}).get('stat_label', 'точность распознавания') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сфера применения -->
+            <div class="sector-section">
+                <h3><i class="fas fa-bullseye"></i> {{ translations.get('sectors', {}).get('title', 'Сфера применения') }}</h3>
+                <div class="sector-cards">
+                    {% if translations.sectors.get('items') %}
+                        {% for sector in translations.sectors.get('items') %}
+                        <div class="sector-card">
+                            <i class="fas fa-{{ sector.icon|default('circle') }}"></i>
+                            <h4>{{ sector.title }}</h4>
+                            <p>{{ sector.description }}</p>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="sector-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Здравоохранение</h4>
+                        <p>Помощь в управлении хроническими заболеваниями</p>
+                    </div>
+                    <div class="sector-card">
+                        <i class="fas fa-universal-access"></i>
+                        <h4>Доступность</h4>
+                        <p>Технология для всех возрастов и способностей</p>
+                    </div>
+                    <div class="sector-card">
+                        <i class="fas fa-hands-helping"></i>
+                        <h4>Социальное воздействие</h4>
+                        <p>Улучшение качества жизни миллионов людей</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- СЕКЦИЯ 2: Команда -->
+    <section class="slide" data-index="1">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-users"></i>
+                    {{ translations.get('team_section', {}).get('title', 'Наша команда') }}
+                </h2>
+                <p class="section-subtitle">{{ translations.get('team_section', {}).get('subtitle', 'Профессионалы, объединённые общей целью') }}</p>
+            </div>
+
+            <div class="team-grid">
+                {% for member in team %}
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <!-- Лицевая сторона -->
+                        <div class="team-card-front">
+                            <div class="team-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3 class="team-name">{{ member.name }}</h3>
+                            <p class="team-role">{{ member.role }}</p>
+                            <div class="flip-hint">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>{{ translations.get('team_section', {}).get('flip_hint', 'Нажми для подробностей') }}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Обратная сторона -->
+                        <div class="team-card-back">
+                            <h4>{{ translations.get('team_section', {}).get('experience_label', 'Опыт работы') }}</h4>
+                            <div class="skills-container">
+                                {% for exp in member.experience %}
+                                <span class="skill-badge">{{ exp }}</span>
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="responsibilities">
+                                <p><strong>{{ translations.get('team_section', {}).get('responsibilities_label', 'Обязанности:') }}</strong></p>
+                                <p class="resp-text">{{ member.responsibilities }}</p>
+                            </div>
+                            
+                            <div class="social-links">
+                                {% if member.links.linkedin != '#' %}
+                                <a href="{{ member.links.linkedin }}" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                {% endif %}
+                                {% if member.links.github != '#' %}
+                                <a href="{{ member.links.github }}" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                {% endif %}
+                                {% if member.links.portfolio != '#' %}
+                                <a href="{{ member.links.portfolio }}" target="_blank" rel="noopener noreferrer" class="social-link" title="Portfolio">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                            <div class="flip-hint">
+                                <i class="fas fa-hand-pointer"></i>
+                                <span>{{ translations.get('team_section', {}).get('flip_back_hint', 'Кликни на карточку чтобы вернуться') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3: Почему мы -->
+    <section class="slide" data-index="2">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    {{ translations.get('why_us', {}).get('title', 'Почему именно мы') }}
+                </h2>
+                <p class="section-subtitle">{{ translations.get('why_us', {}).get('subtitle', 'Что делает нашу команду особенной') }}</p>
+            </div>
+
+            <div class="why-us-grid">
+                {% if translations.get('why_us', {}).get('reasons') %}
+                    {% for reason in translations.get('why_us', {}).get('reasons') %}
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <i class="fas fa-{{ reason.icon|default('star') }}"></i>
+                        </div>
+                        <h3>{{ reason.title }}</h3>
+                        <p>{{ reason.description }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Экспертиза</h3>
+                    <p>Наша команда объединяет экспертов в области компьютерного зрения, машинного обучения и разработки мобильных приложений. Совокупный опыт команды - более 15 лет в IT.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Личная мотивация</h3>
+                    <p>У каждого из нас есть близкие люди с хроническими заболеваниями. Мы не просто создаём продукт - мы решаем реальную проблему, с которой сталкиваемся сами.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Инновационный подход</h3>
+                    <p>Мы используем последние достижения в области AI и computer vision, адаптируя их для решения конкретной социально значимой задачи.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Команда полного цикла</h3>
+                    <p>От исследования и разработки ML-моделей до создания user-friendly мобильного приложения - мы контролируем весь процесс разработки.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Опыт реализации</h3>
+                    <p>Члены нашей команды успешно запустили несколько проектов, включая мобильные приложения с ML-компонентами и веб-сервисы с высокой нагрузкой.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Партнёрства</h3>
+                    <p>Мы активно взаимодействуем с медицинскими специалистами и организациями пациентов для создания действительно полезного решения.</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="achievements-section">
+                <h3><i class="fas fa-trophy"></i> {{ translations.get('why_us', {}).get('achievements_title', 'Наши достижения') }}</h3>
+                <div class="achievements-list">
+                    {% if translations.get('why_us', {}).get('achievements') %}
+                        {% for achievement in translations.get('why_us', {}).get('achievements') %}
+                        <div class="achievement-item">
+                            <span class="achievement-icon">{{ achievement.icon|default('🏆') }}</span>
+                            <span>{{ achievement.text }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="achievement-item">
+                        <span class="achievement-icon">🏆</span>
+                        <span>Победители региональных хакатонов</span>
+                    </div>
+                    <div class="achievement-item">
+                        <span class="achievement-icon">💡</span>
+                        <span>3 успешно запущенных проекта</span>
+                    </div>
+                    <div class="achievement-item">
+                        <span class="achievement-icon">👥</span>
+                        <span>Сообщество 1000+ тестовых пользователей</span>
+                    </div>
+                    <div class="achievement-item">
+                        <span class="achievement-icon">🤝</span>
+                        <span>Партнёрства с медицинскими организациями</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ 4: Дорожная карта -->
+    <section class="slide" data-index="3">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-road"></i>
+                    {{ translations.get('roadmap', {}).get('title', 'Дорожная карта проекта') }}
+                </h2>
+                <p class="section-subtitle">{{ translations.get('roadmap', {}).get('subtitle', 'Наш путь от идеи до запуска') }}</p>
+            </div>
+
+            <div class="current-stage">
+                <div class="stage-badge">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{{ translations.get('roadmap', {}).get('current_stage_label', 'Текущий этап:') }} <strong>{{ roadmap.current_stage }}</strong></span>
+                </div>
+            </div>
+
+            <div class="timeline">
+                {% for milestone in roadmap.milestones %}
+                <div class="timeline-item {{ milestone.status }}">
+                    <div class="timeline-marker">
+                        {% if milestone.status == 'completed' %}
+                        <i class="fas fa-check-circle"></i>
+                        {% elif milestone.status == 'in_progress' %}
+                        <i class="fas fa-spinner fa-pulse"></i>
+                        {% else %}
+                        <i class="far fa-circle"></i>
+                        {% endif %}
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">{{ milestone.date }}</div>
+                        <h3 class="timeline-title">{{ milestone.title }}</h3>
+                        <p class="timeline-description">{{ milestone.description }}</p>
+                        <div class="timeline-status-label">
+                            {% if milestone.status == 'completed' %}
+                            <span class="status-badge completed">{{ translations.get('roadmap', {}).get('status_completed', 'Завершено') }}</span>
+                            {% elif milestone.status == 'in_progress' %}
+                            <span class="status-badge in-progress">{{ translations.get('roadmap', {}).get('status_in_progress', 'В процессе') }}</span>
+                            {% else %}
+                            <span class="status-badge upcoming">{{ translations.get('roadmap', {}).get('status_upcoming', 'Планируется') }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="next-steps">
+                <h3><i class="fas fa-forward"></i> {{ translations.get('roadmap', {}).get('next_steps_title', 'Следующие шаги') }}</h3>
+                <div class="steps-grid">
+                    {% if roadmap.next_steps %}
+                        {% for step in roadmap.next_steps %}
+                        <div class="step-card">
+                            <div class="step-number">{{ loop.index }}</div>
+                            <h4>{{ step.title }}</h4>
+                            <p>{{ step.description }}</p>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Завершение MVP</h4>
+                        <p>Финализация основного функционала и интеграция всех компонентов</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Бета-тестирование</h4>
+                        <p>Запуск закрытого тестирования с фокус-группой из 100 пользователей</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Оптимизация модели</h4>
+                        <p>Улучшение точности и скорости распознавания на основе feedback</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Публичный релиз</h4>
+                        <p>Запуск приложения в App Store и Google Play</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ 5: Как мы реализуем -->
+    <section class="slide" data-index="4">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-rocket"></i>
+                    {{ translations.get('implementation', {}).get('title', 'Как мы планируем реализовать решение') }}
+                </h2>
+                <p class="section-subtitle">{{ translations.get('implementation', {}).get('subtitle', 'Технический подход и архитектура') }}</p>
+            </div>
+
+            <div class="implementation-section">
+                <h3><i class="fas fa-cogs"></i> {{ translations.get('implementation', {}).get('components_title', 'Ключевые компоненты решения') }}</h3>
+                
+                <div class="architecture-diagram">
+                    <div class="arch-layer">
+                        <div class="arch-title">Frontend (Mobile App)</div>
+                        <div class="arch-components">
+                            <span class="arch-component">React Native</span>
+                            <span class="arch-component">Camera API</span>
+                            <span class="arch-component">UI/UX</span>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="arch-title">API Gateway</div>
+                        <div class="arch-components">
+                            <span class="arch-component">REST API</span>
+                            <span class="arch-component">Authentication</span>
+                            <span class="arch-component">Rate Limiting</span>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="arch-title">AI/ML Processing</div>
+                        <div class="arch-components">
+                            <span class="arch-component">Computer Vision</span>
+                            <span class="arch-component">OCR Engine</span>
+                            <span class="arch-component">NLP</span>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="arch-title">Database & Cache</div>
+                        <div class="arch-components">
+                            <span class="arch-component">PostgreSQL</span>
+                            <span class="arch-component">Redis</span>
+                            <span class="arch-component">S3 Storage</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-details">
+                <h3><i class="fas fa-code"></i> Технологический стек</h3>
+                
+                <div class="tech-category">
+                    <h4><i class="fas fa-mobile-alt"></i> Mobile Development</h4>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <strong>React Native</strong>
+                            <p>Кроссплатформенная разработка для iOS и Android</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>Expo</strong>
+                            <p>Ускоренная разработка и тестирование</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h4><i class="fas fa-brain"></i> Machine Learning</h4>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <strong>TensorFlow / PyTorch</strong>
+                            <p>Обучение и деплой ML-моделей</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>OpenCV</strong>
+                            <p>Обработка изображений и распознавание объектов</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>Tesseract OCR</strong>
+                            <p>Распознавание текста с упаковок</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h4><i class="fas fa-server"></i> Backend</h4>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <strong>Python + Flask/FastAPI</strong>
+                            <p>Быстрая разработка REST API</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>PostgreSQL</strong>
+                            <p>Хранение данных пользователей и продуктов</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>Redis</strong>
+                            <p>Кэширование частых запросов</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h4><i class="fas fa-cloud"></i> Infrastructure</h4>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <strong>Docker</strong>
+                            <p>Контейнеризация сервисов</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>AWS / GCP</strong>
+                            <p>Облачная инфраструктура</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>CI/CD</strong>
+                            <p>Автоматизация деплоя</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="implementation-steps">
+                <h3><i class="fas fa-list-ol"></i> Этапы реализации</h3>
+                
+                <div class="steps-timeline">
+                    <div class="step-item">
+                        <div class="step-header">
+                            <span class="step-badge">Этап 1</span>
+                            <h4>Сбор и подготовка данных</h4>
+                        </div>
+                        <ul>
+                            <li>Создание датасета изображений продуктов</li>
+                            <li>Аннотация и разметка данных</li>
+                            <li>Построение базы данных ингредиентов</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-header">
+                            <span class="step-badge">Этап 2</span>
+                            <h4>Обучение ML-моделей</h4>
+                        </div>
+                        <ul>
+                            <li>Обучение модели распознавания объектов</li>
+                            <li>Тренировка OCR для чтения состава</li>
+                            <li>NLP для понимания названий ингредиентов</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-header">
+                            <span class="step-badge">Этап 3</span>
+                            <h4>Разработка backend</h4>
+                        </div>
+                        <ul>
+                            <li>Создание REST API</li>
+                            <li>Интеграция ML-моделей</li>
+                            <li>Настройка базы данных</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-header">
+                            <span class="step-badge">Этап 4</span>
+                            <h4>Разработка мобильного приложения</h4>
+                        </div>
+                        <ul>
+                            <li>Дизайн UI/UX</li>
+                            <li>Реализация функционала камеры</li>
+                            <li>Интеграция с backend API</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-header">
+                            <span class="step-badge">Этап 5</span>
+                            <h4>Тестирование и оптимизация</h4>
+                        </div>
+                        <ul>
+                            <li>Unit и интеграционные тесты</li>
+                            <li>Тестирование с пользователями</li>
+                            <li>Оптимизация производительности</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-header">
+                            <span class="step-badge">Этап 6</span>
+                            <h4>Деплой и масштабирование</h4>
+                        </div>
+                        <ul>
+                            <li>Настройка облачной инфраструктуры</li>
+                            <li>Мониторинг и логирование</li>
+                            <li>Публикация в App Store / Google Play</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unique-features">
+                <h3><i class="fas fa-gem"></i> Уникальные особенности</h3>
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Мгновенный анализ</h4>
+                        <p>Результат за 2-3 секунды</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fas fa-wifi"></i>
+                        <h4>Offline режим</h4>
+                        <p>Работа без интернета</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fas fa-user-cog"></i>
+                        <h4>Персонализация</h4>
+                        <p>Учёт личных ограничений</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fas fa-database"></i>
+                        <h4>База данных</h4>
+                        <p>50,000+ продуктов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Навигация desktop перенесена в header сверху -->
+
+{% endblock %}
+
+
+
+
+
