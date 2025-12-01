@@ -66,10 +66,6 @@
         <i class="fas fa-rocket"></i>
         <span>{{ translations.get('navigation', {}).get('implementation_short', 'План') }}</span>
     </button>
-    <button class="tab-button" data-section="5">
-        <i class="fas fa-handshake"></i>
-        <span>{{ translations.get('navigation', {}).get('additional_short', 'Доп.') }}</span>
-    </button>
 </nav>
 
 <!-- Переключатель языка для мобильных -->
@@ -228,6 +224,15 @@
                     </div>
                     {% endif %}
                 </div>
+            </div>
+
+            <!-- Кнопка перехода к разделу "Дополнительно" (только mobile) -->
+            <div class="additional-button-wrapper mobile-only">
+                <button class="btn-additional" onclick="window.SmartCare.goToSlide(5)">
+                    <i class="fas fa-handshake"></i>
+                    <span>{{ translations.get('navigation', {}).get('additional', 'Финансовая интеграция') }}</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
 

@@ -677,6 +677,53 @@ img {
     color: var(--text-light);
 }
 
+/* Кнопка "Дополнительно" (только mobile) */
+.additional-button-wrapper {
+    margin-top: 40px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.btn-additional {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--gradient-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-additional:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.btn-additional:active {
+    transform: translateY(0);
+}
+
+.btn-additional i:first-child {
+    font-size: 1.2rem;
+}
+
+.btn-additional i:last-child {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-additional:hover i:last-child {
+    transform: translateX(4px);
+}
+
 /* ===================================
    Section Headers
    =================================== */
