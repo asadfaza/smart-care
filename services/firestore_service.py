@@ -189,6 +189,19 @@ class FirestoreService:
         Returns:
             Данные с извлеченным языком
         """
+        # Проверяем, есть ли в данных ключи 'ru' и 'en' на верхнем уровне
+        # Это означает структуру типа: {id: '...', ru: {...}, en: {...}}
+        if 'ru' in data and 'en' in data:
+            # Извлекаем данные для нужного языка
+            lang_data = data.get(lang, data.get('ru', {}))
+            
+            # Добавляем обратно 'id' если он есть
+            if 'id' in data:
+                lang_data['id'] = data['id']
+            
+            return lang_data
+        
+        # Иначе обрабатываем каждое поле отдельно (старая логика)
         result = {}
         
         for key, value in data.items():

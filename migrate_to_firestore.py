@@ -26,36 +26,32 @@ print("✓ Firebase подключен успешно!\n")
 # Навигация
 navigation_data = {
     'ru': {
-        'desktop': [
-            {'id': 'home', 'text': 'Главная', 'icon': 'home'},
-            {'id': 'team', 'text': 'Команда', 'icon': 'users'},
-            {'id': 'why_us', 'text': 'Почему мы', 'icon': 'star'},
-            {'id': 'roadmap', 'text': 'Дорожная карта', 'icon': 'road'},
-            {'id': 'implementation', 'text': 'Реализация', 'icon': 'rocket'}
-        ],
-        'mobile': [
-            {'id': 'home', 'text': 'Главная', 'icon': 'home'},
-            {'id': 'team', 'text': 'Команда', 'icon': 'users'},
-            {'id': 'why_us', 'text': 'О нас', 'icon': 'star'},
-            {'id': 'roadmap', 'text': 'Карта', 'icon': 'road'},
-            {'id': 'implementation', 'text': 'План', 'icon': 'rocket'}
-        ]
+        # Desktop header
+        'home': 'Главная',
+        'team': 'Команда',
+        'why_us': 'Почему мы',
+        'roadmap': 'Дорожная карта',
+        'implementation': 'Реализация',
+        # Mobile tabs (короткие версии)
+        'home_short': 'Главная',
+        'team_short': 'Команда',
+        'why_us_short': 'О нас',
+        'roadmap_short': 'Карта',
+        'implementation_short': 'План'
     },
     'en': {
-        'desktop': [
-            {'id': 'home', 'text': 'Home', 'icon': 'home'},
-            {'id': 'team', 'text': 'Team', 'icon': 'users'},
-            {'id': 'why_us', 'text': 'Why Us', 'icon': 'star'},
-            {'id': 'roadmap', 'text': 'Roadmap', 'icon': 'road'},
-            {'id': 'implementation', 'text': 'Implementation', 'icon': 'rocket'}
-        ],
-        'mobile': [
-            {'id': 'home', 'text': 'Home', 'icon': 'home'},
-            {'id': 'team', 'text': 'Team', 'icon': 'users'},
-            {'id': 'why_us', 'text': 'About', 'icon': 'star'},
-            {'id': 'roadmap', 'text': 'Map', 'icon': 'road'},
-            {'id': 'implementation', 'text': 'Plan', 'icon': 'rocket'}
-        ]
+        # Desktop header
+        'home': 'Home',
+        'team': 'Team',
+        'why_us': 'Why Us',
+        'roadmap': 'Roadmap',
+        'implementation': 'Implementation',
+        # Mobile tabs (короткие версии)
+        'home_short': 'Home',
+        'team_short': 'Team',
+        'why_us_short': 'About',
+        'roadmap_short': 'Map',
+        'implementation_short': 'Plan'
     }
 }
 
@@ -80,13 +76,13 @@ problem_data = {
     'ru': {
         'icon': 'exclamation-triangle',
         'title': 'Проблема',
-        'intro': 'Люди с хроническими заболеваниями (диабет, целиакия, пищевые аллергии) сталкиваются с серьёзными трудностями:',
-        'points': [
-            'Тратят много времени на изучение состава продуктов',
-            'Сложно найти мелкий шрифт на упаковках',
-            'Ошибки могут привести к серьёзным последствиям для здоровья',
-            'Непонятные химические названия ингредиентов',
-            'Постоянный стресс при покупке продуктов'
+        'description': 'Люди с хроническими заболеваниями (диабет, целиакия, пищевые аллергии) сталкиваются с серьёзными трудностями:',
+        'challenges': [
+            {'icon': 'clock', 'text': 'Тратят много времени на изучение состава продуктов'},
+            {'icon': 'search', 'text': 'Сложно найти мелкий шрифт на упаковках'},
+            {'icon': 'exclamation-circle', 'text': 'Ошибки могут привести к серьёзным последствиям для здоровья'},
+            {'icon': 'question-circle', 'text': 'Непонятные химические названия ингредиентов'},
+            {'icon': 'tired', 'text': 'Постоянный стресс при покупке продуктов'}
         ],
         'stat_number': '~60 млн',
         'stat_label': 'человек в мире живут с диабетом и аллергиями'
@@ -94,13 +90,13 @@ problem_data = {
     'en': {
         'icon': 'exclamation-triangle',
         'title': 'Problem',
-        'intro': 'People with chronic diseases (diabetes, celiac disease, food allergies) face serious difficulties:',
-        'points': [
-            'Spend a lot of time studying product composition',
-            'Difficult to find small print on packages',
-            'Mistakes can lead to serious health consequences',
-            'Incomprehensible chemical names of ingredients',
-            'Constant stress when buying products'
+        'description': 'People with chronic diseases (diabetes, celiac disease, food allergies) face serious difficulties:',
+        'challenges': [
+            {'icon': 'clock', 'text': 'Spend a lot of time studying product composition'},
+            {'icon': 'search', 'text': 'Difficult to find small print on packages'},
+            {'icon': 'exclamation-circle', 'text': 'Mistakes can lead to serious health consequences'},
+            {'icon': 'question-circle', 'text': 'Incomprehensible chemical names of ingredients'},
+            {'icon': 'tired', 'text': 'Constant stress when buying products'}
         ],
         'stat_number': '~60 million',
         'stat_label': 'people worldwide live with diabetes and allergies'
@@ -112,11 +108,11 @@ solution_data = {
     'ru': {
         'icon': 'lightbulb',
         'title': 'Наше решение',
-        'intro': 'Smart Care использует компьютерное зрение и AI для мгновенного анализа продуктов через камеру смартфона.',
-        'features': [
-            {'icon': 'camera', 'title': 'Сканируй', 'text': 'Наведи камеру на продукт'},
-            {'icon': 'brain', 'title': 'Анализируй', 'text': 'AI обрабатывает состав'},
-            {'icon': 'check-circle', 'title': 'Получай ответ', 'text': 'Безопасно или нет'}
+        'description': 'Smart Care использует компьютерное зрение и AI для мгновенного анализа продуктов через камеру смартфона.',
+        'steps': [
+            {'icon': 'camera', 'title': 'Сканируй', 'description': 'Наведи камеру на продукт'},
+            {'icon': 'brain', 'title': 'Анализируй', 'description': 'AI обрабатывает состав'},
+            {'icon': 'check-circle', 'title': 'Получай ответ', 'description': 'Безопасно или нет'}
         ],
         'tech_title': 'Технологии',
         'technologies': [
@@ -131,11 +127,11 @@ solution_data = {
     'en': {
         'icon': 'lightbulb',
         'title': 'Our Solution',
-        'intro': 'Smart Care uses computer vision and AI for instant product analysis via smartphone camera.',
-        'features': [
-            {'icon': 'camera', 'title': 'Scan', 'text': 'Point camera at product'},
-            {'icon': 'brain', 'title': 'Analyze', 'text': 'AI processes composition'},
-            {'icon': 'check-circle', 'title': 'Get Answer', 'text': 'Safe or not'}
+        'description': 'Smart Care uses computer vision and AI for instant product analysis via smartphone camera.',
+        'steps': [
+            {'icon': 'camera', 'title': 'Scan', 'description': 'Point camera at product'},
+            {'icon': 'brain', 'title': 'Analyze', 'description': 'AI processes composition'},
+            {'icon': 'check-circle', 'title': 'Get Answer', 'description': 'Safe or not'}
         ],
         'tech_title': 'Technologies',
         'technologies': [
@@ -154,7 +150,7 @@ sectors_data = {
     'ru': {
         'title': 'Сфера применения',
         'icon': 'bullseye',
-        'sectors': [
+        'items': [
             {
                 'icon': 'heartbeat',
                 'title': 'Здравоохранение',
@@ -175,7 +171,7 @@ sectors_data = {
     'en': {
         'title': 'Application Areas',
         'icon': 'bullseye',
-        'sectors': [
+        'items': [
             {
                 'icon': 'heartbeat',
                 'title': 'Healthcare',
@@ -217,42 +213,56 @@ team_section_data = {
     }
 }
 
-# Члены команды
+# Члены команды (ПРАВИЛЬНАЯ СТРУКТУРА: ru/en разделены)
 team_members = [
     {
         'id': 'asadbek',
-        'name': 'Асадбек Фазлиддинов',
-        'role': {
-            'ru': 'Team Lead & Developer',
-            'en': 'Team Lead & Developer'
+        'ru': {
+            'name': 'Асадбек Фазлиддинов',
+            'role': 'Team Lead & Developer',
+            'experience': ['Yandex Taxi', 'Uzum Market'],
+            'responsibilities': 'Руководство командой, разработка backend на Flask, интеграция ML моделей, создание API',
+            'links': {
+                'linkedin': 'https://www.linkedin.com/in/asadbek-fazliddinov',
+                'github': '#',
+                'portfolio': '#'
+            }
         },
-        'experience': ['Yandex Taxi', 'Uzum Market'],
-        'responsibilities': {
-            'ru': 'Руководство командой, разработка backend на Flask, интеграция ML моделей, создание API',
-            'en': 'Team leadership, Flask backend development, ML model integration, API creation'
-        },
-        'links': {
-            'linkedin': 'https://www.linkedin.com/in/asadbek-fazliddinov',
-            'github': '#',
-            'portfolio': '#'
+        'en': {
+            'name': 'Asadbek Fazliddinov',
+            'role': 'Team Lead & Developer',
+            'experience': ['Yandex Taxi', 'Uzum Market'],
+            'responsibilities': 'Team leadership, Flask backend development, ML model integration, API creation',
+            'links': {
+                'linkedin': 'https://www.linkedin.com/in/asadbek-fazliddinov',
+                'github': '#',
+                'portfolio': '#'
+            }
         }
     },
     {
         'id': 'saydullo',
-        'name': 'Сайдулло Султонов',
-        'role': {
-            'ru': 'Business Researcher',
-            'en': 'Business Researcher'
+        'ru': {
+            'name': 'Сайдулло Султонов',
+            'role': 'Business Researcher',
+            'experience': ['Ermak', 'abnmb group', 'Cau medical'],
+            'responsibilities': 'Анализ рынка и конкурентов, исследование потребностей пользователей, разработка бизнес-модели',
+            'links': {
+                'linkedin': 'https://www.linkedin.com/in/saydullo-sultonov-837347255/',
+                'github': '#',
+                'portfolio': '#'
+            }
         },
-        'experience': ['Ermak', 'abnmb group', 'Cau medical'],
-        'responsibilities': {
-            'ru': 'Анализ рынка и конкурентов, исследование потребностей пользователей, разработка бизнес-модели',
-            'en': 'Market and competitor analysis, user needs research, business model development'
-        },
-        'links': {
-            'linkedin': 'https://www.linkedin.com/in/saydullo-sultonov-837347255/',
-            'github': '#',
-            'portfolio': '#'
+        'en': {
+            'name': 'Saydullo Sultonov',
+            'role': 'Business Researcher',
+            'experience': ['Ermak', 'abnmb group', 'Cau medical'],
+            'responsibilities': 'Market and competitor analysis, user needs research, business model development',
+            'links': {
+                'linkedin': 'https://www.linkedin.com/in/saydullo-sultonov-837347255/',
+                'github': '#',
+                'portfolio': '#'
+            }
         }
     }
 ]
@@ -263,36 +273,36 @@ why_us_data = {
         'title': 'Почему именно мы',
         'subtitle': 'Что делает нашу команду особенной',
         'icon': 'star',
-        'cards': [
+        'reasons': [
             {
                 'icon': 'graduation-cap',
                 'title': 'Экспертиза',
-                'text': 'Наша команда объединяет экспертов в области компьютерного зрения, машинного обучения и разработки мобильных приложений. Совокупный опыт команды - более 15 лет в IT.'
+                'description': 'Наша команда объединяет экспертов в области компьютерного зрения, машинного обучения и разработки мобильных приложений. Совокупный опыт команды - более 15 лет в IT.'
             },
             {
                 'icon': 'heart',
                 'title': 'Личная мотивация',
-                'text': 'У каждого из нас есть близкие люди с хроническими заболеваниями. Мы не просто создаём продукт - мы решаем реальную проблему, с которой сталкиваемся сами.'
+                'description': 'У каждого из нас есть близкие люди с хроническими заболеваниями. Мы не просто создаём продукт - мы решаем реальную проблему, с которой сталкиваемся сами.'
             },
             {
                 'icon': 'rocket',
                 'title': 'Инновационный подход',
-                'text': 'Мы используем последние достижения в области AI и computer vision, адаптируя их для решения конкретной социально значимой задачи.'
+                'description': 'Мы используем последние достижения в области AI и computer vision, адаптируя их для решения конкретной социально значимой задачи.'
             },
             {
                 'icon': 'users-cog',
                 'title': 'Команда полного цикла',
-                'text': 'От исследования и разработки ML-моделей до создания user-friendly мобильного приложения - мы контролируем весь процесс разработки.'
+                'description': 'От исследования и разработки ML-моделей до создания user-friendly мобильного приложения - мы контролируем весь процесс разработки.'
             },
             {
                 'icon': 'chart-line',
                 'title': 'Опыт реализации',
-                'text': 'Члены нашей команды успешно запустили несколько проектов, включая мобильные приложения с ML-компонентами и веб-сервисы с высокой нагрузкой.'
+                'description': 'Члены нашей команды успешно запустили несколько проектов, включая мобильные приложения с ML-компонентами и веб-сервисы с высокой нагрузкой.'
             },
             {
                 'icon': 'handshake',
                 'title': 'Партнёрства',
-                'text': 'Мы активно взаимодействуем с медицинскими специалистами и организациями пациентов для создания действительно полезного решения.'
+                'description': 'Мы активно взаимодействуем с медицинскими специалистами и организациями пациентов для создания действительно полезного решения.'
             }
         ],
         'achievements_title': 'Наши достижения',
@@ -307,36 +317,36 @@ why_us_data = {
         'title': 'Why Choose Us',
         'subtitle': 'What makes our team special',
         'icon': 'star',
-        'cards': [
+        'reasons': [
             {
                 'icon': 'graduation-cap',
                 'title': 'Expertise',
-                'text': 'Our team brings together experts in computer vision, machine learning, and mobile app development. Combined team experience - over 15 years in IT.'
+                'description': 'Our team brings together experts in computer vision, machine learning, and mobile app development. Combined team experience - over 15 years in IT.'
             },
             {
                 'icon': 'heart',
                 'title': 'Personal Motivation',
-                'text': 'Each of us has loved ones with chronic diseases. We\'re not just creating a product - we\'re solving a real problem we face ourselves.'
+                'description': 'Each of us has loved ones with chronic diseases. We\'re not just creating a product - we\'re solving a real problem we face ourselves.'
             },
             {
                 'icon': 'rocket',
                 'title': 'Innovative Approach',
-                'text': 'We use the latest achievements in AI and computer vision, adapting them to solve a specific socially significant task.'
+                'description': 'We use the latest achievements in AI and computer vision, adapting them to solve a specific socially significant task.'
             },
             {
                 'icon': 'users-cog',
                 'title': 'Full-Cycle Team',
-                'text': 'From research and ML model development to creating a user-friendly mobile app - we control the entire development process.'
+                'description': 'From research and ML model development to creating a user-friendly mobile app - we control the entire development process.'
             },
             {
                 'icon': 'chart-line',
                 'title': 'Implementation Experience',
-                'text': 'Our team members have successfully launched several projects, including mobile apps with ML components and high-load web services.'
+                'description': 'Our team members have successfully launched several projects, including mobile apps with ML components and high-load web services.'
             },
             {
                 'icon': 'handshake',
                 'title': 'Partnerships',
-                'text': 'We actively collaborate with medical professionals and patient organizations to create a truly useful solution.'
+                'description': 'We actively collaborate with medical professionals and patient organizations to create a truly useful solution.'
             }
         ],
         'achievements_title': 'Our Achievements',
@@ -355,9 +365,12 @@ roadmap_data = {
         'title': 'Дорожная карта проекта',
         'subtitle': 'Наш путь от идеи до запуска',
         'icon': 'road',
-        'current_stage': 'MVP Development',
+        'current_stage': 'Разработка MVP',
         'stage_label': 'Текущий этап:',
-        'next_steps_title': 'Следующие шаги'
+        'next_steps_title': 'Следующие шаги',
+        'status_completed': 'Завершено',
+        'status_in_progress': 'В процессе',
+        'status_upcoming': 'Планируется'
     },
     'en': {
         'title': 'Project Roadmap',
@@ -365,110 +378,361 @@ roadmap_data = {
         'icon': 'road',
         'current_stage': 'MVP Development',
         'stage_label': 'Current Stage:',
-        'next_steps_title': 'Next Steps'
+        'next_steps_title': 'Next Steps',
+        'status_completed': 'Completed',
+        'status_in_progress': 'In Progress',
+        'status_upcoming': 'Upcoming'
     }
 }
 
-# Этапы roadmap
+# Реализация (НОВАЯ СЕКЦИЯ - ранее отсутствовала!)
+implementation_data = {
+    'ru': {
+        'title': 'Как мы планируем реализовать решение',
+        'subtitle': 'Технический подход и архитектура',
+        'icon': 'rocket',
+        'components_title': 'Ключевые компоненты решения',
+        'tech_stack_title': 'Технологический стек',
+        'implementation_steps_title': 'Этапы реализации',
+        'unique_features_title': 'Уникальные особенности',
+        
+        # Категории технологий
+        'tech_categories': [
+            {
+                'icon': 'mobile-alt',
+                'title': 'Мобильная разработка',
+                'technologies': [
+                    {'name': 'React Native', 'description': 'Кроссплатформенная разработка для iOS и Android'},
+                    {'name': 'Expo', 'description': 'Ускоренная разработка и тестирование'}
+                ]
+            },
+            {
+                'icon': 'brain',
+                'title': 'Машинное обучение',
+                'technologies': [
+                    {'name': 'TensorFlow / PyTorch', 'description': 'Обучение и деплой ML-моделей'},
+                    {'name': 'OpenCV', 'description': 'Обработка изображений и распознавание объектов'},
+                    {'name': 'Tesseract OCR', 'description': 'Распознавание текста с упаковок'}
+                ]
+            },
+            {
+                'icon': 'server',
+                'title': 'Backend',
+                'technologies': [
+                    {'name': 'Python + Flask/FastAPI', 'description': 'Быстрая разработка REST API'},
+                    {'name': 'PostgreSQL', 'description': 'Хранение данных пользователей и продуктов'},
+                    {'name': 'Redis', 'description': 'Кэширование частых запросов'}
+                ]
+            },
+            {
+                'icon': 'cloud',
+                'title': 'Инфраструктура',
+                'technologies': [
+                    {'name': 'Docker', 'description': 'Контейнеризация сервисов'},
+                    {'name': 'AWS / GCP', 'description': 'Облачная инфраструктура'},
+                    {'name': 'CI/CD', 'description': 'Автоматизация деплоя'}
+                ]
+            }
+        ],
+        
+        # Этапы реализации
+        'implementation_steps': [
+            {
+                'badge': 'Этап 1',
+                'title': 'Сбор и подготовка данных',
+                'tasks': [
+                    'Создание датасета изображений продуктов',
+                    'Аннотация и разметка данных',
+                    'Построение базы данных ингредиентов'
+                ]
+            },
+            {
+                'badge': 'Этап 2',
+                'title': 'Обучение ML-моделей',
+                'tasks': [
+                    'Обучение модели распознавания объектов',
+                    'Тренировка OCR для чтения состава',
+                    'NLP для понимания названий ингредиентов'
+                ]
+            },
+            {
+                'badge': 'Этап 3',
+                'title': 'Разработка backend',
+                'tasks': [
+                    'Создание REST API',
+                    'Интеграция ML-моделей',
+                    'Настройка базы данных'
+                ]
+            },
+            {
+                'badge': 'Этап 4',
+                'title': 'Разработка мобильного приложения',
+                'tasks': [
+                    'Дизайн UI/UX',
+                    'Реализация функционала камеры',
+                    'Интеграция с backend API'
+                ]
+            },
+            {
+                'badge': 'Этап 5',
+                'title': 'Тестирование и оптимизация',
+                'tasks': [
+                    'Unit и интеграционные тесты',
+                    'Тестирование с пользователями',
+                    'Оптимизация производительности'
+                ]
+            },
+            {
+                'badge': 'Этап 6',
+                'title': 'Деплой и масштабирование',
+                'tasks': [
+                    'Настройка облачной инфраструктуры',
+                    'Мониторинг и логирование',
+                    'Публикация в App Store / Google Play'
+                ]
+            }
+        ],
+        
+        # Уникальные особенности
+        'unique_features': [
+            {'icon': 'bolt', 'title': 'Мгновенный анализ', 'description': 'Результат за 2-3 секунды'},
+            {'icon': 'wifi', 'title': 'Offline режим', 'description': 'Работа без интернета'},
+            {'icon': 'user-cog', 'title': 'Персонализация', 'description': 'Учёт личных ограничений'},
+            {'icon': 'database', 'title': 'База данных', 'description': '50,000+ продуктов'}
+        ]
+    },
+    'en': {
+        'title': 'How We Plan to Implement the Solution',
+        'subtitle': 'Technical approach and architecture',
+        'icon': 'rocket',
+        'components_title': 'Key Solution Components',
+        'tech_stack_title': 'Technology Stack',
+        'implementation_steps_title': 'Implementation Stages',
+        'unique_features_title': 'Unique Features',
+        
+        # Technology categories
+        'tech_categories': [
+            {
+                'icon': 'mobile-alt',
+                'title': 'Mobile Development',
+                'technologies': [
+                    {'name': 'React Native', 'description': 'Cross-platform development for iOS and Android'},
+                    {'name': 'Expo', 'description': 'Accelerated development and testing'}
+                ]
+            },
+            {
+                'icon': 'brain',
+                'title': 'Machine Learning',
+                'technologies': [
+                    {'name': 'TensorFlow / PyTorch', 'description': 'ML model training and deployment'},
+                    {'name': 'OpenCV', 'description': 'Image processing and object recognition'},
+                    {'name': 'Tesseract OCR', 'description': 'Text recognition from packages'}
+                ]
+            },
+            {
+                'icon': 'server',
+                'title': 'Backend',
+                'technologies': [
+                    {'name': 'Python + Flask/FastAPI', 'description': 'Fast REST API development'},
+                    {'name': 'PostgreSQL', 'description': 'User and product data storage'},
+                    {'name': 'Redis', 'description': 'Frequent query caching'}
+                ]
+            },
+            {
+                'icon': 'cloud',
+                'title': 'Infrastructure',
+                'technologies': [
+                    {'name': 'Docker', 'description': 'Service containerization'},
+                    {'name': 'AWS / GCP', 'description': 'Cloud infrastructure'},
+                    {'name': 'CI/CD', 'description': 'Deploy automation'}
+                ]
+            }
+        ],
+        
+        # Implementation stages
+        'implementation_steps': [
+            {
+                'badge': 'Stage 1',
+                'title': 'Data Collection and Preparation',
+                'tasks': [
+                    'Creating product image dataset',
+                    'Data annotation and labeling',
+                    'Building ingredient database'
+                ]
+            },
+            {
+                'badge': 'Stage 2',
+                'title': 'ML Model Training',
+                'tasks': [
+                    'Training object detection model',
+                    'OCR training for composition reading',
+                    'NLP for ingredient name understanding'
+                ]
+            },
+            {
+                'badge': 'Stage 3',
+                'title': 'Backend Development',
+                'tasks': [
+                    'Creating REST API',
+                    'ML model integration',
+                    'Database setup'
+                ]
+            },
+            {
+                'badge': 'Stage 4',
+                'title': 'Mobile App Development',
+                'tasks': [
+                    'UI/UX Design',
+                    'Camera functionality implementation',
+                    'Backend API integration'
+                ]
+            },
+            {
+                'badge': 'Stage 5',
+                'title': 'Testing and Optimization',
+                'tasks': [
+                    'Unit and integration tests',
+                    'User testing',
+                    'Performance optimization'
+                ]
+            },
+            {
+                'badge': 'Stage 6',
+                'title': 'Deployment and Scaling',
+                'tasks': [
+                    'Cloud infrastructure setup',
+                    'Monitoring and logging',
+                    'App Store / Google Play publishing'
+                ]
+            }
+        ],
+        
+        # Unique features
+        'unique_features': [
+            {'icon': 'bolt', 'title': 'Instant Analysis', 'description': 'Results in 2-3 seconds'},
+            {'icon': 'wifi', 'title': 'Offline Mode', 'description': 'Works without internet'},
+            {'icon': 'user-cog', 'title': 'Personalization', 'description': 'Personal restriction tracking'},
+            {'icon': 'database', 'title': 'Database', 'description': '50,000+ products'}
+        ]
+    }
+}
+
+# Этапы roadmap (ПРАВИЛЬНАЯ СТРУКТУРА: ru/en разделены)
 milestones = [
     {
         'id': 'milestone_1',
-        'title': {
-            'ru': 'Исследование и концепция',
-            'en': 'Research and Concept'
+        'ru': {
+            'title': 'Исследование и концепция',
+            'date': 'Ноябрь 2024',
+            'status': 'completed',
+            'description': 'Анализ проблемы, исследование рынка, разработка концепции'
         },
-        'date': 'Ноябрь 2024',
-        'status': 'completed',
-        'description': {
-            'ru': 'Анализ проблемы, исследование рынка, разработка концепции',
-            'en': 'Problem analysis, market research, concept development'
+        'en': {
+            'title': 'Research and Concept',
+            'date': 'November 2024',
+            'status': 'completed',
+            'description': 'Problem analysis, market research, concept development'
         }
     },
     {
         'id': 'milestone_2',
-        'title': {
-            'ru': 'Прототип MVP',
-            'en': 'MVP Prototype'
+        'ru': {
+            'title': 'Прототип MVP',
+            'date': 'Декабрь 2024',
+            'status': 'in_progress',
+            'description': 'Разработка базового функционала, обучение ML модели'
         },
-        'date': 'Декабрь 2024',
-        'status': 'in_progress',
-        'description': {
-            'ru': 'Разработка базового функционала, обучение ML модели',
-            'en': 'Basic functionality development, ML model training'
+        'en': {
+            'title': 'MVP Prototype',
+            'date': 'December 2024',
+            'status': 'in_progress',
+            'description': 'Basic functionality development, ML model training'
         }
     },
     {
         'id': 'milestone_3',
-        'title': {
-            'ru': 'Тестирование',
-            'en': 'Testing'
+        'ru': {
+            'title': 'Тестирование',
+            'date': 'Январь 2025',
+            'status': 'upcoming',
+            'description': 'Альфа-тестирование с фокус-группой пользователей'
         },
-        'date': 'Январь 2025',
-        'status': 'upcoming',
-        'description': {
-            'ru': 'Альфа-тестирование с фокус-группой пользователей',
-            'en': 'Alpha testing with focus group of users'
+        'en': {
+            'title': 'Testing',
+            'date': 'January 2025',
+            'status': 'upcoming',
+            'description': 'Alpha testing with focus group of users'
         }
     },
     {
         'id': 'milestone_4',
-        'title': {
-            'ru': 'Публичный релиз',
-            'en': 'Public Release'
+        'ru': {
+            'title': 'Публичный релиз',
+            'date': 'Февраль 2025',
+            'status': 'upcoming',
+            'description': 'Запуск приложения в App Store и Google Play'
         },
-        'date': 'Февраль 2025',
-        'status': 'upcoming',
-        'description': {
-            'ru': 'Запуск приложения в App Store и Google Play',
-            'en': 'Launch app in App Store and Google Play'
+        'en': {
+            'title': 'Public Release',
+            'date': 'February 2025',
+            'status': 'upcoming',
+            'description': 'Launch app in App Store and Google Play'
         }
     }
 ]
 
-# Следующие шаги
+# Следующие шаги (ПРАВИЛЬНАЯ СТРУКТУРА: ru/en разделены)
 next_steps = [
     {
-        'number': 1,
-        'title': {
-            'ru': 'Завершение MVP',
-            'en': 'Complete MVP'
+        'id': 'step_1',
+        'ru': {
+            'title': 'Завершение MVP',
+            'description': 'Финализация основного функционала и интеграция всех компонентов',
+            'number': 1
         },
-        'description': {
-            'ru': 'Финализация основного функционала и интеграция всех компонентов',
-            'en': 'Finalize core functionality and integrate all components'
+        'en': {
+            'title': 'Complete MVP',
+            'description': 'Finalize core functionality and integrate all components',
+            'number': 1
         }
     },
     {
-        'number': 2,
-        'title': {
-            'ru': 'Бета-тестирование',
-            'en': 'Beta Testing'
+        'id': 'step_2',
+        'ru': {
+            'title': 'Бета-тестирование',
+            'description': 'Запуск закрытого тестирования с фокус-группой из 100 пользователей',
+            'number': 2
         },
-        'description': {
-            'ru': 'Запуск закрытого тестирования с фокус-группой из 100 пользователей',
-            'en': 'Launch closed testing with focus group of 100 users'
+        'en': {
+            'title': 'Beta Testing',
+            'description': 'Launch closed testing with focus group of 100 users',
+            'number': 2
         }
     },
     {
-        'number': 3,
-        'title': {
-            'ru': 'Оптимизация модели',
-            'en': 'Model Optimization'
+        'id': 'step_3',
+        'ru': {
+            'title': 'Оптимизация модели',
+            'description': 'Улучшение точности и скорости распознавания на основе feedback',
+            'number': 3
         },
-        'description': {
-            'ru': 'Улучшение точности и скорости распознавания на основе feedback',
-            'en': 'Improve accuracy and recognition speed based on feedback'
+        'en': {
+            'title': 'Model Optimization',
+            'description': 'Improve accuracy and recognition speed based on feedback',
+            'number': 3
         }
     },
     {
-        'number': 4,
-        'title': {
-            'ru': 'Публичный релиз',
-            'en': 'Public Release'
+        'id': 'step_4',
+        'ru': {
+            'title': 'Публичный релиз',
+            'description': 'Запуск приложения в App Store и Google Play',
+            'number': 4
         },
-        'description': {
-            'ru': 'Запуск приложения в App Store и Google Play',
-            'en': 'Launch app in App Store and Google Play'
+        'en': {
+            'title': 'Public Release',
+            'description': 'Launch app in App Store and Google Play',
+            'number': 4
         }
     }
 ]
@@ -494,11 +758,11 @@ meta_data = {
 # Footer
 footer_data = {
     'ru': {
-        'copyright': '© 2024 Smart Care. Все права защищены.',
+        'copyright': '© 2025 Smart Care. Все права защищены.',
         'tagline': 'Создано с ❤️ для хакатона'
     },
     'en': {
-        'copyright': '© 2024 Smart Care. All rights reserved.',
+        'copyright': '© 2025 Smart Care. All rights reserved.',
         'tagline': 'Created with ❤️ for hackathon'
     }
 }
@@ -604,12 +868,15 @@ def upload_team():
             team_section_data[lang]
         )
     
-    # Члены команды
+    # Члены команды (ОБНОВЛЕННАЯ СТРУКТУРА)
     for member in team_members:
         firestore_service.create_document(
             'team_members',
             member['id'],
-            member
+            {
+                'ru': member['ru'],
+                'en': member['en']
+            }
         )
     
     print("✓ Команда загружена\n")
@@ -637,23 +904,40 @@ def upload_roadmap():
             roadmap_data[lang]
         )
     
-    # Milestones
+    # Milestones (ОБНОВЛЕННАЯ СТРУКТУРА)
     for milestone in milestones:
         firestore_service.create_document(
             'roadmap_milestones',
             milestone['id'],
-            milestone
+            {
+                'ru': milestone['ru'],
+                'en': milestone['en']
+            }
         )
     
-    # Next steps
+    # Next steps (ОБНОВЛЕННАЯ СТРУКТУРА)
     for step in next_steps:
         firestore_service.create_document(
             'roadmap_next_steps',
-            f'step_{step["number"]}',
-            step
+            step['id'],
+            {
+                'ru': step['ru'],
+                'en': step['en']
+            }
         )
     
     print("✓ Дорожная карта загружена\n")
+
+def upload_implementation():
+    """Загрузка секции реализации (НОВАЯ ФУНКЦИЯ)"""
+    print("🚀 Загрузка секции реализации...")
+    for lang in ['ru', 'en']:
+        firestore_service.create_document(
+            'translations',
+            f'{lang}_implementation',
+            implementation_data[lang]
+        )
+    print("✓ Секция реализации загружена\n")
 
 def upload_meta_and_footer():
     """Загрузка метаданных и footer"""
@@ -701,6 +985,7 @@ def main():
         upload_team()
         upload_why_us()
         upload_roadmap()
+        upload_implementation()  # НОВАЯ ФУНКЦИЯ!
         upload_meta_and_footer()
         upload_errors()
         
@@ -714,6 +999,7 @@ def main():
         print(f"  • Команда ({len(team_members)} членов)")
         print("  • Почему мы (6 карточек + достижения)")
         print(f"  • Дорожная карта ({len(milestones)} milestones + {len(next_steps)} next steps)")
+        print("  • Реализация (новая секция)")
         print("  • Метаданные и footer")
         print("  • Страницы ошибок (404, 500)")
         print("\n✨ Все данные успешно загружены в Firebase Firestore!\n")

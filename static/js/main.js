@@ -8,7 +8,7 @@
 // ===================================
 
 let currentSlide = 0;
-const totalSlides = 5;
+const totalSlides = 6;
 let touchStartX = 0;
 let touchEndX = 0;
 let isDesktop = window.innerWidth >= 1024;
@@ -282,7 +282,9 @@ const updateFooterYear = () => {
     const footerText = document.querySelector('.footer p');
     if (footerText) {
         const currentYear = new Date().getFullYear();
-        footerText.innerHTML = `&copy; ${currentYear} Smart Care. Все права защищены.`;
+        const currentText = footerText.innerHTML;
+        // Обновляем только год, сохраняя остальной текст
+        footerText.innerHTML = currentText.replace(/©\s*\d{4}/, `© ${currentYear}`);
     }
 };
 

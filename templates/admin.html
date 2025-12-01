@@ -23,7 +23,7 @@
             <button class="admin-tab" data-tab="settings">
                 <i class="fas fa-wrench"></i> Настройки
             </button>
-        </header>
+        </div>
 
         <!-- Translations Tab -->
         <div class="admin-content active" id="translations-tab">
@@ -112,6 +112,11 @@
     background: var(--light-gray);
 }
 
+.admin-panel .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .admin-header {
     text-align: center;
     margin-bottom: 40px;
@@ -137,11 +142,11 @@
     gap: 10px;
     margin-bottom: 30px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .admin-tab {
-    flex: 1;
-    min-width: 150px;
+    flex: 0 0 auto;
     padding: 15px 25px;
     background: var(--white);
     border: 2px solid var(--light-gray);
@@ -151,6 +156,7 @@
     color: var(--text);
     transition: all 0.3s;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .admin-tab:hover {
@@ -256,6 +262,8 @@
 .translations-list, .team-list, .roadmap-list {
     display: grid;
     gap: 20px;
+    grid-template-columns: 1fr;
+    max-width: 100%;
 }
 
 .translation-item, .team-item, .roadmap-item {
@@ -264,6 +272,7 @@
     border-radius: 10px;
     border: 2px solid transparent;
     transition: all 0.3s;
+    width: 100%;
 }
 
 .translation-item:hover, .team-item:hover, .roadmap-item:hover {
@@ -292,12 +301,16 @@
 }
 
 .settings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .setting-item {
+    flex: 0 0 auto;
+    width: 320px;
+    max-width: 100%;
     padding: 25px;
     background: var(--light-gray);
     border-radius: 10px;
@@ -342,8 +355,23 @@
         align-items: stretch;
     }
     
+    .admin-navigation {
+        justify-content: flex-start;
+    }
+    
     .admin-tab {
-        min-width: 100%;
+        flex: 0 0 auto;
+        font-size: 0.9rem;
+        padding: 12px 20px;
+    }
+    
+    .settings-grid {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .setting-item {
+        width: 100%;
     }
 }
 </style>

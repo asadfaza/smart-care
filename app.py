@@ -167,7 +167,8 @@ def get_translations(lang='ru'):
         # Получаем все документы переводов
         translation_keys = [
             'navigation', 'hero', 'problem', 'solution', 'sectors',
-            'team_section', 'why_us', 'roadmap', 'meta', 'footer', 'errors'
+            'team_section', 'why_us', 'roadmap', 'implementation',
+            'additional', 'meta', 'footer', 'errors'
         ]
         
         for key in translation_keys:
@@ -230,7 +231,13 @@ def admin():
         return "Access denied", 403
     
     current_lang = get_current_language()
-    return render_template('admin.html', current_lang=current_lang)
+    translations = get_translations(current_lang)
+    
+    return render_template(
+        'admin.html', 
+        current_lang=current_lang,
+        translations=translations
+    )
 
 # API эндпоинты
 @app.route('/api/health')
